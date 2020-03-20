@@ -8,7 +8,18 @@ import {
 } from './types';
 
 export const fetchData = () => async dispatch => {
-    
+    try {
+        const res = await axios.get('http://localhost:3333/smurfs');
+        dispatch({
+            type: FETCH_DATA,
+            payload: res.data
+        });
+    } catch(err) {
+        dispatch({
+            type: ERROR,
+            payload: `Error fetching data: ${err.message}`
+        });
+    }
 }
 
 export const addSmurf = ({ name, age, height }) => async dispatch => {
