@@ -9,7 +9,7 @@ const Form = () => {
     const dispatch = useDispatch();
     const [smurf, setSmurf] = useState({
         name: '',
-        age: 0,
+        age: '',
         height: ''
     });
 
@@ -23,13 +23,18 @@ const Form = () => {
     const handleSubmit = e => {
         e.preventDefault();
         dispatch(addSmurf(smurf));
+        setSmurf({
+            name: '',
+            age: '',
+            height: ''
+        });
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <TextField onChange={handleInputChange} value={smurf.name} id='name' name='name' type='text' label='Name' />
-            <TextField onChange={handleInputChange} value={smurf.age} id='age' name='age' type='number' label='Age' />
-            <TextField onChange={handleInputChange} value={smurf.height} id='height' name='height' type='text' label='Height' />
+            <TextField required onChange={handleInputChange} value={smurf.name} id='name' name='name' type='text' label='Name' />
+            <TextField required onChange={handleInputChange} value={smurf.age} id='age' name='age' type='number' label='Age' />
+            <TextField required onChange={handleInputChange} value={smurf.height} id='height' name='height' type='text' label='Height' />
             <IconButton type='submit'>
                 <Add />
             </IconButton>
