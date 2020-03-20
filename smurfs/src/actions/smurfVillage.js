@@ -10,7 +10,7 @@ import {
 export const fetchData = () => async dispatch => {
     try {
         const res = await axios.get('http://localhost:3333/smurfs');
-        debugger
+        
         dispatch({
             type: FETCH_DATA,
             payload: res.data
@@ -23,10 +23,9 @@ export const fetchData = () => async dispatch => {
     }
 }
 
-export const addSmurf = ({ name, age, height }) => async dispatch => {
+export const addSmurf = (smurf) => async dispatch => {
     try {
-        const body = JSON.stringify({ name, age, height });
-        const res = await axios.post('http://localhost:3333/smurfs/', body);
+        const res = await axios.post('http://localhost:3333/smurfs/', smurf);
         dispatch({
             type: ADD_SMURF,
             payload: res.data
@@ -41,8 +40,7 @@ export const addSmurf = ({ name, age, height }) => async dispatch => {
 
 export const editSmurf = ({ name, age, height, id }) => async dispatch => {
     try {
-        const body = JSON.stringify({ name, age, height });
-        const res = await axios.put(`http://localhost:3333/smurfs/${id}`, body);
+        const res = await axios.put(`http://localhost:3333/smurfs/${id}`, { name, height, age });
 
         dispatch({
             type: EDIT_SMURF,

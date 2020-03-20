@@ -9,19 +9,24 @@ const Form = () => {
     const dispatch = useDispatch();
     const [smurf, setSmurf] = useState({
         name: '',
-        age: null,
+        age: 0,
         height: ''
     });
 
     const handleInputChange = e => {
         setSmurf({
             ...smurf,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
         });
     }
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch(addSmurf(smurf));
+    }
+
     return (
-        <form onSubmit={ () => dispatch(addSmurf(smurf)) }>
+        <form onSubmit={handleSubmit}>
             <TextField onChange={handleInputChange} value={smurf.name} id='name' name='name' type='text' label='Name' />
             <TextField onChange={handleInputChange} value={smurf.age} id='age' name='age' type='number' label='Age' />
             <TextField onChange={handleInputChange} value={smurf.height} id='height' name='height' type='text' label='Height' />
