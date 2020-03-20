@@ -14,6 +14,7 @@ export default (state=initialState, action) => {
         case ERROR:
             return {
                 ...state,
+                loading: false,
                 error: payload
             };
         case FETCH_DATA:
