@@ -10,6 +10,7 @@ import {
 export const fetchData = () => async dispatch => {
     try {
         const res = await axios.get('http://localhost:3333/smurfs');
+        debugger
         dispatch({
             type: FETCH_DATA,
             payload: res.data

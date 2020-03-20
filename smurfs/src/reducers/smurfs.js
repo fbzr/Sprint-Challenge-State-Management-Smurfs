@@ -1,5 +1,4 @@
-import { FETCH_DATA, ERROR, ADD_SMURF } from './types';
-import { EDIT_SMURF, DELETE_SMURF } from '../actions/types';
+import { FETCH_DATA, ERROR, ADD_SMURF, EDIT_SMURF, DELETE_SMURF } from '../actions/types';
 
 const initialState = {
     smurfs: [],
