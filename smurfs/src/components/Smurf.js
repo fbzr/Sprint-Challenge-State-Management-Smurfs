@@ -16,17 +16,26 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column'
     },
     image: {
-        height: '150px'
+        height: '150px',
+        objectFit: 'contain'
     },
     card: {
         
+     },
+     header: {
+         paddingTop: '4px',
+         paddingBottom: '4px'
+     },
+     content: {
+        paddingTop: '4px',
+        paddingBottom: '4px'
      }
 }));
 
 const Smurf = ({smurf}) => {
     const dispatch = useDispatch();
     const {name, age, height, id} = smurf;
-    const { container, image, card } = useStyles();
+    const { container, image, card, header, content } = useStyles();
     const [newValues, setNewValues] = useState({
         name,
         age,
@@ -59,8 +68,8 @@ const Smurf = ({smurf}) => {
             <form onSubmit={handleSubmit}>
                 <Card>
                     <CardMedia image={`url(${smurfImg})`} title="Live from space album cover" />
-                    <CardHeader title={smurf.name} />
-                    <CardContent>
+                    <CardHeader className={header} title={smurf.name} />
+                    <CardContent className={content}>
                         {editing ? 
                         <TextField required id='age' name='age' type='number' value={newValues.age} onChange={handleInputChange} /> :
                         <Typography>Age: {age}</Typography> }
