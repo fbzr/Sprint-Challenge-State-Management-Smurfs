@@ -39,7 +39,20 @@ export const addSmurf = ({ name, age, height }) => async dispatch => {
 }
 
 export const editSmurf = ({ name, age, height, id }) => async dispatch => {
-    
+    try {
+        const body = JSON.stringify({ name, age, height });
+        const res = await axios.put(`http://localhost:3333/smurfs/${id}`, body);
+
+        dispatch({
+            type: EDIT_SMURF,
+            payload: res.data
+        });
+    } catch(err) {
+        dispatch({
+            type: ERROR,
+            payload: `Error editing smurf: ${err.message}`
+        });
+    }
 }
 
 export const removeSmurf = smurfId => async dispatch => {
