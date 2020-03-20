@@ -56,5 +56,17 @@ export const editSmurf = ({ name, age, height, id }) => async dispatch => {
 }
 
 export const removeSmurf = smurfId => async dispatch => {
-    
+    try {
+        const res = await axios.delete(`http://localhost:3333/smurfs/${smurfId}`);
+        
+        dispatch({
+            type: DELETE_SMURF,
+            payload: res.data
+        });
+    } catch(err) {
+        dispatch({
+            type: ERROR,
+            payload: `Error deleting smurf: ${err.message}`
+        });
+    }
 }
